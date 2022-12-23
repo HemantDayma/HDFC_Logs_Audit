@@ -46,8 +46,8 @@ def ivr_data(hosts,writer,start_date,end_date):
             cur.execute(Query)
             colnames = [desc[0] for desc in cur.description]
             data = pd.DataFrame(cur.fetchall())
-            data.columns = colnames
             if len(data) > 0:
+                data.columns = colnames
                 ivr_df = ivr_df.append(data)
             cur.close()
             conn.close()
@@ -91,8 +91,8 @@ def sms_data(hosts,writer,start_date,end_date):
             cur.execute(Query)
             colnames = [desc[0] for desc in cur.description]
             data = pd.DataFrame(cur.fetchall())
-            data.columns = colnames
             if len(data) > 0:
+                data.columns = colnames
                 sms_df = sms_df.append(data)
             cur.close()
             conn.close()
@@ -119,23 +119,17 @@ def data_sorting(ivr_df,sms_df,file_name,writer):
 
 if __name__ == '__main__':
     try:
-        # date_list = [['2022-11-01','2022-11-10'],['2022-11-11','2022-11-15'],
-        #             ['2022-11-16','2022-11-20'],['2022-11-21','2022-11-25'],['2022-11-26','2022-11-30']]
+        date_list = [['2022-12-01','2022-12-05'],['2022-12-05','2022-12-10'],
+                    ['2022-12-11','2022-12-15'],['2022-12-15','2022-12-20'],['2022-12-21','2022-12-23']]
         
-        date_list = [['2022-12-01','2022-12-05'],['2022-12-06','2022-12-10']]
+        # date_list = [['2022-12-01','2022-12-05'],['2022-12-06','2022-12-10']]
         
         for date in date_list:
             print(date[0],date[1])
-            writer = pd.ExcelWriter('/Users/hemantdayma/Documents/HDFC_Audit_logs_Script/HDFC_logs_Audit_{}_{}.xlsx'.format(date[0],date[1]), 
+            writer = pd.ExcelWriter('/Users/hemantdayma/Documents/HDFC_Logs_Audit/HDFC_logs_Audit_{}_{}.xlsx'.format(date[0],date[1]), 
                                     engine='xlsxwriter')
             # Host Name For data Pulling..
-            hosts = ['sp2605.spoctocular.com','sp2605v3.spoctocular.com']
-            
-            # Date Format..
-            
-            # start_date = '2022-11-01'
-            # end_date = '2022-11-10'
-            # print('From',start_date,'To',end_date)
+            hosts = ['engage2605.cluster-ro-cs4ck8i0kklf.ap-south-1.rds.amazonaws.com','enagge-2605v3.cluster-ro-cs4ck8i0kklf.ap-south-1.rds.amazonaws.com']
             
             # IVR_DATA Pulling....
             
@@ -153,48 +147,3 @@ if __name__ == '__main__':
         exc_type, exc_obj, exc_tb = sys.exc_info()
         fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
         print(exc_type, fname, exc_tb.tb_lineno, e)
-    
-    
-    
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
