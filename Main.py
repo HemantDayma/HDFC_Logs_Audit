@@ -126,7 +126,8 @@ if __name__ == '__main__':
         
         for date in date_list:
             print(date[0],date[1])
-            writer = pd.ExcelWriter('/Users/hemantdayma/Documents/HDFC_Logs_Audit/HDFC_logs_Audit_{}_{}.xlsx'.format(date[0],date[1]), 
+            path = os.getcwd()
+            writer = pd.ExcelWriter(path+'/HDFC_logs_Audit_{}_{}.xlsx'.format(date[0],date[1]), 
                                     engine='xlsxwriter')
             # Host Name For data Pulling..
             hosts = ['engage2605.cluster-ro-cs4ck8i0kklf.ap-south-1.rds.amazonaws.com','enagge-2605v3.cluster-ro-cs4ck8i0kklf.ap-south-1.rds.amazonaws.com']
